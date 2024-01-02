@@ -25,7 +25,10 @@
 
     <div class="card">
         <div class="card-header">
-            <h1>Novo título</h1>
+            <div class="clearfix">
+                <h1 class="panel-title aw-titulo-panel">Novo Título</h1>
+                <a class="btn btn-link aw-link-panel" href="/titulos">Voltar para Pesquisa</a>
+            </div>
         </div>
 
         <div class="alert alert-primary alert-dismissible fade show" role="alert" th:if="${!#strings.isEmpty(mensagem)}">

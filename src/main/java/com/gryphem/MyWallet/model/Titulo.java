@@ -76,4 +76,8 @@ public class Titulo {
     public int hashCode() {
         return Objects.hash(codigo, descricao, dataVencimento, valor, status);
     }
+
+    public boolean isPendente(){
+        return StatusTitulo.PENDENTE.equals(this.status);
+    }
 }
