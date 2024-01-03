@@ -6,6 +6,8 @@
     <title>Pesquisa de títulos</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 
@@ -50,7 +52,9 @@
                           th:classappend="${titulo.isPendente ? 'text-bg-danger' : 'text-bg-success'}"></span>
                 </td>
                 <td class="text-center">
-
+                    <a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}">
+                        <span class="material-symbols-outlined">Edit</span>
+                    </a>
                 </td>
 
             </tr>
