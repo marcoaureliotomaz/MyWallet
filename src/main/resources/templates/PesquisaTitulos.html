@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Pesquisa de títulos</title>
@@ -28,6 +28,12 @@
             <a class="btn btn-link aw-link-panel" href="/titulos/novo">Novo título</a>
         </div>
     </div>
+
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
+        <spam th:text="${mensagem}"></spam>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <div class="card-body">
         <table class="table table-bordered table-striped">
             <thead>
@@ -55,6 +61,11 @@
                     <a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}">
                         <span class="material-symbols-outlined">Edit</span>
                     </a>
+                    <a class="btn btn-link btn-xs"  data-bs-toggle="modal" data-bs-target="#confirmacaoExclusaoModal"
+                       th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}">
+                        <span class="material-symbols-outlined">Delete</span>
+                    </a>
+
                 </td>
 
             </tr>
@@ -66,8 +77,13 @@
     </div>
 </div>
 
+<div th:replace="DialogoConfirmacaoExclusao">
+
+</div>
 
 <script src="/js/jquery-3.7.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/cobranca.js"></script>
+
 </body>
 </html>

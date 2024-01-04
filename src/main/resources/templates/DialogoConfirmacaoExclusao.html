@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <meta charset="UTF-8"/>
+    <title>Pesquisa de títulos</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <div class="modal fade" id="confirmacaoExclusaoModal" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <form th:attr="data-url-base='/titulos'" method="POST" th:method="DELETE">
+
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Você tem certeza ?</h4>
+                </div>
+                <div class="modal-body">
+                    <span> Tem certeza que deseja apaar o título ?</span>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" >Excluir</button>
+                </div>
+"
+            </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</html>

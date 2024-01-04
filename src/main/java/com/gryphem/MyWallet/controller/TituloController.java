@@ -25,11 +25,6 @@ public class TituloController {
     @Autowired
     private Titulos titulos;
 
-
-
-
-
-
     @RequestMapping("/novo")
     public ModelAndView novo() {
         ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
@@ -72,4 +67,12 @@ public class TituloController {
         mv.addObject(titulo);
         return mv;
     }
+    @RequestMapping(value="{codigo}", method = RequestMethod.DELETE)
+    public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
+        titulos.deleteById(codigo);
+
+        attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+        return "redirect:/titulos";
+    }
+
 }
