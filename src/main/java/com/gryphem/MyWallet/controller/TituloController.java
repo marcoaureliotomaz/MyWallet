@@ -3,6 +3,7 @@ package com.gryphem.MyWallet.controller;
 import com.gryphem.MyWallet.model.StatusTitulo;
 import com.gryphem.MyWallet.model.Titulo;
 import com.gryphem.MyWallet.repository.Titulos;
+import com.gryphem.MyWallet.service.CadastroTituloService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,6 +27,9 @@ public class TituloController {
     @Autowired
     private Titulos titulos;
 
+    @Autowired
+    private CadastroTituloService cadastroTituloService;
+
     @RequestMapping("/novo")
     public ModelAndView novo() {
         ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
@@ -40,11 +44,11 @@ public class TituloController {
             return CADASTRO_VIEW;
         }
         try {
-            titulos.save(titulo);
+            cadastroTituloService.salvar(titulo);
             redirectAttributes.addFlashAttribute("mensagem", "Tìtulo salvo com sucesso!");
             return "redirect:/titulos/novo";
-        }catch (DataIntegrityViolationException e){
-            errors.rejectValue("dataVencimento", null, "Formato de data inválido!");
+        }catch (IllegalArgumentException e){
+            errors.rejectValue("dataVencimento", null, e.getMessage());
             return CADASTRO_VIEW;
         }
 
@@ -77,7 +81,7 @@ public class TituloController {
     }
     @RequestMapping(value="{codigo}", method = RequestMethod.DELETE)
     public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
-        titulos.deleteById(codigo);
+        cadastroTituloService.excluir(codigo);
 
         attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
         return "redirect:/titulos";
