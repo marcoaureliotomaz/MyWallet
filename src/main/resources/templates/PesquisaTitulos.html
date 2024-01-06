@@ -59,10 +59,10 @@
                 </td>
                 <td class="text-center">
                     <a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}">
-                        <span class="material-symbols-outlined">Edit</span>
+                        <span class="material-symbols-outlined" title="Editar" rel="tooltip" data-bs-placement="top">Edit</span>
                     </a>
                     <a class="btn btn-link btn-xs"  data-bs-toggle="modal" data-bs-target="#confirmacaoExclusaoModal"
-                       th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}">
+                       th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}" title="Excluir" rel="tooltip" data-bs-placement="top">
                         <span class="material-symbols-outlined">Delete</span>
                     </a>
 
