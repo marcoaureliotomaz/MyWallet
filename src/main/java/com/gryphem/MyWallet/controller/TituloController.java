@@ -71,6 +71,7 @@ public class TituloController {
 
     @RequestMapping("{codigo}")
     public ModelAndView edicao(@PathVariable Long codigo){
+
         Titulo titulo = titulos.findById(codigo).orElse(new Titulo());
 
 
@@ -85,6 +86,13 @@ public class TituloController {
 
         attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
         return "redirect:/titulos";
+    }
+
+    @RequestMapping(value="/{codigo}/receber", method = RequestMethod.PUT)
+    public @ResponseBody String receber(@PathVariable Long codigo){
+        cadastroTituloService.receber(codigo);
+
+        return StatusTitulo.PENDENTE.getDescricao();
     }
 
 }
