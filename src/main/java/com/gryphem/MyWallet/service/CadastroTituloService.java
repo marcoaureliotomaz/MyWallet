@@ -3,10 +3,12 @@ package com.gryphem.MyWallet.service;
 import com.gryphem.MyWallet.model.StatusTitulo;
 import com.gryphem.MyWallet.model.Titulo;
 import com.gryphem.MyWallet.repository.Titulos;
+import com.gryphem.MyWallet.repository.filter.TituloFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -32,6 +34,10 @@ public class CadastroTituloService {
         Titulo titulo =  titulos.findById(codigo).orElseThrow(()-> new NoSuchElementException("Título de número " + codigo+"não encontrado"));;
         titulo.setStatus(StatusTitulo.RECEBIDO);
         titulos.save(titulo);
+    }
+
+    public List<Titulo> filtrarTitulo(TituloFilter filtro) {
+        return titulos.findByDescricaoContaining(filtro.getDescricao());
     }
 }
 

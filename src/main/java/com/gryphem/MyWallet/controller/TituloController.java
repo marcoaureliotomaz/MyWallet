@@ -3,10 +3,12 @@ package com.gryphem.MyWallet.controller;
 import com.gryphem.MyWallet.model.StatusTitulo;
 import com.gryphem.MyWallet.model.Titulo;
 import com.gryphem.MyWallet.repository.Titulos;
+import com.gryphem.MyWallet.repository.filter.TituloFilter;
 import com.gryphem.MyWallet.service.CadastroTituloService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +22,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/titulos")
+
 public class TituloController {
 
     private static final String CADASTRO_VIEW= "CadastroTitulo";
@@ -56,8 +59,9 @@ public class TituloController {
     }
 
     @RequestMapping
-    public ModelAndView pesquisar() {
-        List<Titulo> todosTitulos = titulos.findAll();
+    public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
+        List<Titulo> todosTitulos = cadastroTituloService.filtrarTitulo(filtro);
+
         ModelAndView mv = new ModelAndView("PesquisaTitulos");
         mv.addObject("titulos", todosTitulos);
         return mv;
